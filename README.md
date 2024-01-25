@@ -1,1 +1,2 @@
-# IJCAI2024
+# Revisit_RecLoss
+Understanding Recommendation Loss from Contrastive Perspective

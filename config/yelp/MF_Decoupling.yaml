@@ -1,0 +1,64 @@
+dataset: yelp
+log_name: MF_Decoupling
+save_dir: ./saved_model/yelp/MF_Decoupling/
+log_dir: ./saved_log/yelp/MF_Decoupling/
+
+
+epochs: 200
+learning_rate: 1.e-4
+embedding_dim: 64
+dataloader: get_Decoupling_CCL_trainloader
+model: MF
+
+cosine_flag_train: True
+cosine_flag_test: True
+
+num_neg: 1023
+neg_weight:  1.1 
+
+
+pos_weight: 0 
+
+K: 1.25
+
+#LightGCN
+embedding_dropout: 0.1
+keep_prob : 0.9
+split : False
+folds: 100
+n_layers: 3
+node_drop: True
+
+
+pos_temperature:  0.15
+neg_temperature:  0.14
+
+
+regularizer:  1 
+loss: Decoupling
+
+patience: 20
+lr_reduce_factor: 0.5
+reset_lr: False
+sampling_method: uniform
+train_batch_size: 1024
+seed: 2019
+monitor: Recall(k=20)
+
+
+
+
+metrics: ['Recall(k=20)', 'Recall(k=50)','NDCG(k=20)','NDCG(k=50)','HitRate(k=20)','HitRate(k=50)']
+dataset_config:
+    yelp:
+        train_data: ../../data/Yelp18/yelp18_x0/train.csv
+        test_data: ../../data/Yelp18/yelp18_x0/test.csv
+        valid_data: ../../data/Yelp18/yelp18_x0/test.csv
+    amazonbooks:
+        train_data: ../../data/AmazonBooks/amazonbooks_x0/train.csv
+        test_data: ../../data/AmazonBooks/amazonbooks_x0/test.csv
+        valid_data: ../../data/AmazonBooks/amazonbooks_x0/test.csv
+    gowalla:
+        train_data: ../../data/Gowalla/gowalla_x0/train.csv
+        test_data: ../../data/Gowalla/gowalla_x0/test.csv
+        valid_data: ../../data/Gowalla/gowalla_x0/test.csv
